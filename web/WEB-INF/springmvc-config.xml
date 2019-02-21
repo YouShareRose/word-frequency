@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!-- 配置 Handle, 映射“/hello” 请求 -->
-    <bean name="/hello" class="org.fkit.controller.HelloController"></bean>
-    <!-- 处理器映射器将 bean 的 name 作为 url 进行查找，需要在配置 Handle 时指定 name（即 url）-->
-    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
-    <!-- SimpleControllerHandlerAdapter 是一个处理器适配器，所有处理器适配器都要实现 HandlerAdapter 接口 -->
-    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- Spring 自动扫描 base-package 下面的包或子包下面的JAVA -->
+    <context:component-scan base-package="org.fkit.controller" />
+    <!-- 配置 annotation 类型的处理器映射器 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+    <!-- 配置 annotation 类型的处理器适配器 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
     <!-- 视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
 </beans>
