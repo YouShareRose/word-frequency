@@ -68,9 +68,70 @@
 
 ### Conroller
 
+- 用于标记一个类为控制器类
+- 使Spring能找到控制器
+
+	- 在配置文件的头文件中引入spring-context
+	- 使用<context:component-scan/>元素
+
+		- 功能：启动包扫描的功能，以便注册带有@Controller\@Service\@Compoment等注解的类成为Spring的Bean
+		- 配置：<sontext:component-scan base-package="your.controller.package"/>
+
+	- <mvc:annotation-driven/>
+
+		- 应用默认配置方案，自动注册RequestMappingHandlerMapping 和 RequestMappingHandlerAdapter 两个Bean、提供数据绑定支持、@Valid支持等功能
+
+	- <mvc:default-servlet-handler/>
+
+		- 静态资源处理器，在Spring MVC 上下文中定义一个DefaultServletHttpPequestHandler,对进入DispatcherServlet 的URL 进行筛查，如果是静态资源的请求，交由Web 应用服务器默认的Servlet 处理
+
 ### RequestMapping
 
+- 可用于类或方法
+- 属性
+
+	- value Strng[] 用于将指定请求的实际地址映射到方法上
+	- name String 给映射地址一个别名
+	- method RequestMethod[] 指定请求的方法类型，包括 GET\POST\HEAD\OPTIONS\PUT\PATCH\DELETE\TRACE
+	- consumes String[] 指定处理请求提交内容类型（Content-Type），如application/json 、 text\html等，例如 consumes="application/json"
+	- produces String[] 指定返回的内容类型，返回的内容类型必须是request请求头（Accept）中所包含的类型
+	- params String[] 指定request中必须包含某些参数时，才让该方法处理，例如 params="myParam=myValue"
+	- headers String[] 指定request中必须包含某些指定的header值时，才让该方法处理请求，例如 headers="Referer=http://some.org"
+
+- 可出现的参数类型
+
+	- HttpServletRequest
+	- HttpSession
+	- Model
+	- WebRequest
+
+		- 重点方法：getParameter、getHeader、setAttribute、getAttribute、框架无侵入
+
+- 可返回的类型
+
+	- ModelAmdView
+	- Map
+	- String
+	- HttpEntity
+
+- 页面转发
+
+	- 转发到JSP页面
+
+		- 默认使用服务器内部跳转（foeward） return "main"
+		- 客户端重定向 return "redirect:/main.jsp" 相当于在浏览器重新发送请求，所以不能访问WEB-INF 下的资源文件，而且也必须写资源文件后缀名，因为此时spring-config.xml文件的视图解析器设置的前缀和后缀都将无效
+
+	- 转发到控制器的请求处理方法
+
+		- 服务器内部跳转到名为main 的请求处理方法 return “forward:/main”
+		- 客户端重定向到名为main 的请求处理方法 return “redirect:/main”
+
 ### RequestParam
+
+- 用于将指定的请求参数赋值给方法中的形参
+- 属性
+
+	- name
 
 ### PathVariable
 
