@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class HelloController  {
 
-
     @RequestMapping("helloController")
     public String helloController(Model model){
         model.addAttribute("message","use @Controller");
