@@ -131,25 +131,58 @@
 - 用于将指定的请求参数赋值给方法中的形参
 - 属性
 
-	- name
+	- name String 请求参数绑定的名称
+	- value String name属性的别名
+	- required boolean 是否必须绑定，默认为true
+	- defaultValue String 如果没有传递参数而使用的默认值
+
+- 示例：@RequestParam(value="name",defaultValue="yourNmae") String name
 
 ### PathVariable
 
+- 获得请求URL中的动态参数
+- 属性
+
+	- name String 指定请求参数绑定的名称，如果省略则绑定同名参数
+	- value String name的别名
+	- required boolean 指示参数是否必须绑定
+
+- 示例：@RequestMapping(value="/path/variable/{userId}/")  public void method(@PathVariable Integer userId)
+
 ### MatrixVariable
+
+- 拓展URL请求地址的功能，多个变量可以使用“:”(分号)分隔，可以进行条件组合查询
+- 在Spring MVC中默认不启用，开启方法 <mvc:annotation-driven enable-matrix-variables="true"/>
 
 ### CrossOrigin
 
+- 处理跨域请求
+
 ### RequestHeader
+
+- 将请求的头信息数据映射到功能处理方法的参数上
 
 ### CookieValue
 
 ### RequestAttribute
 
+- 访问由请求处理方法、过滤器或拦截器创建的、预先存在于request 作用域中的属性，将该属性转换到目标方法的参数
+
 ### SessionAttribute
+
+- 访问由请求处理方法、过滤器或拦截器创建的、预先存在于session 作用域中的属性，将该属性转换到目标方法的参数
+
+### SessionAttributes
+
+- 可以有选择地指定Model中的哪些属性转存到 HttpSession 对象中
 
 ### ModelAttribute
 
+- 将请求参数绑定到对象，被@ModelAttribute 注释的方法会在Controller每个执行方法前被执行
+
 ### RequestBody
+
+- 常用来处理Content-Type 为 application/json  application/xml 不能处理 multipart/form-data 格式 
 
 ### ResponseBody
 
