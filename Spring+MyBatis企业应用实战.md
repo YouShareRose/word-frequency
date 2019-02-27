@@ -186,9 +186,42 @@
 
 ### ResponseBody
 
+- 用于将Controller的请求处理方法返回的对象，通过适当的HttpMessageConverter转换为指定格式后，写入到Response 对象的body 数据区
+
+### 转换XML数据
+
+- @XmlRootElement @XmlElment
+
 ### RestController
 
+- 本身使用了@Controller 和 @ResponseBody
+
 ### 异常处理
+
+- SimpleMappingExceptionResolver
+
+  <!-- 异常处理
+      	p:defaultErrorView="error"表示所有没有指定的异常,都跳转到异常处理页面error
+      	p:exceptionAttribute="ex"表示异常处理页面中访问的异常对象变量名是ex
+       -->
+      <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"
+      	p:defaultErrorView="error"
+      	p:exceptionAttribute="ex">
+      	<!-- 异常映射 
+      		exceptionMappings表示映射的异常，接受参数是一个Properties
+      		key是异常类名，value是处理异常的页面
+      	-->
+      	<property name="exceptionMappings">
+      		<props>
+      			<prop key="IOException">ioerror</prop>
+      			<prop key="SQLException">sqlerror</prop>
+      		</props>
+      	</property>
+      </bean>
+
+- @RequestStatus（code/value, reason） 注解， 使用时先声明一个自定义异常类，加上此注解，表示在系统运行期间，当抛出自定义异常时，将code 和 reason 返回给客户端，提高可读性
+- 使用@ExceptionHandler 注解实现局部异常处理，作用对象为方法，运行时有效
+- 使用@ControllerAdvice 注解实现统一异常处理，另有@RestConreollerAdvice
 
 ## 标签库
 
