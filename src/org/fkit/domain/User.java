@@ -1,4 +1,4 @@
-package com.fkit.domain;
+package org.fkit.domain;
 
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,6 +1,6 @@
 package org.fkit.controller;
 
-import com.fkit.domain.User;
+import org.fkit.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
